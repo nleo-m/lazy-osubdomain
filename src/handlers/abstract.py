@@ -31,6 +31,6 @@ class Handler(ABC):
     def get_page_urls(self, page):
         pass
 
-    def show_results(self):   
+    def show_results(self):
         for s in self.subdomains:
             print(s)
