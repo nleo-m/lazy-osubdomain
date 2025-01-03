@@ -1,12 +1,3 @@
-# get number of pages
-# while page < numOfPages
-# req get page > use start=10**0 param in google
-# parse page content
-# find all page urls
-# for url in urls
-# if url not in foundSubdomains
-# add url to foundSubdomains
-
 from abc import ABC
 
 class Handler(ABC):
@@ -14,6 +5,9 @@ class Handler(ABC):
         self.url_regex = r'https?://[a-zA-Z0-9.-]+'
         self.subdomains = []
         self.domain = ""
+
+    def show_banner(self):
+        print('''Lazy o'subdomain''')
     
     @classmethod
     def find_subdomains(self):
@@ -32,5 +26,7 @@ class Handler(ABC):
         pass
 
     def show_results(self):
+        print("\033[93m" + f"Unique subdomains found: {len(self.subdomains)}\n")
+
         for s in self.subdomains:
-            print(s)
+            print('\033[92m' + s)
