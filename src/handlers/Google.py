@@ -10,7 +10,7 @@ class Google(Handler):
     def __init__(self, args):
         super().__init__()
         self.domain = args.domain
-        self.timeout = args.timeout
+        self.timeout = int(args.timeout)
         self.max_pages = args.max_pages
         self.offset = 1000
         self.base_url = "https://www.google.com"

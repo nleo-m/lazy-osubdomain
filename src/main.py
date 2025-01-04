@@ -12,9 +12,13 @@ def get_args():
     parser = argparse.ArgumentParser(prog="Lazy o'subdomain")
     parser.add_argument("-d", "--domain", required=True, help="Domain to hunt")
     parser.add_argument(
-        "-t", "--timeout", default=2, help="How long to sleep between requests"
+        "-t",
+        "--timeout",
+        type=int,
+        default=1,
+        help="How long to sleep between requests",
     )
-    parser.add_argument("-mp", "--max-pages", help="Max pages to go through")
+    parser.add_argument("-mp", "--max-pages", type=int, help="Max pages to go through")
 
     args = parser.parse_args()
     return args
