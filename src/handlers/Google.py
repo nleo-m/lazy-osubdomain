@@ -1,4 +1,4 @@
-from .abstract import Handler
+from .Abstract import Handler
 from bs4 import BeautifulSoup
 import math
 import requests
@@ -6,7 +6,7 @@ import re
 import time
 
 
-class GoogleHandler(Handler):
+class Google(Handler):
     def __init__(self, domain, offset = 1000):
         super().__init__()
         self.domain = domain
