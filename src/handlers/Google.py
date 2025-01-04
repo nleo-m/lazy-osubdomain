@@ -12,6 +12,7 @@ class Google(Handler):
         self.domain = args.domain
         self.timeout = args.timeout
         self.max_pages = args.max_pages
+        self.offset = 1000
         self.base_url = "https://www.google.com"
 
     def find_subdomains(self):
@@ -31,7 +32,7 @@ class Google(Handler):
                 "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0"
             },
         )
-        soup = BeautifulSoup(r.content, "html.parser")
+        soup = BeautifulSoup(r.content, "lxml")
         results = (
             soup.find("div", id="result-stats")
             .get_text()
@@ -50,7 +51,7 @@ class Google(Handler):
                 "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0"
             },
         )
-        soup = BeautifulSoup(r.content, "html.parser")
+        soup = BeautifulSoup(r.content, "lxml")
 
         return soup
 
