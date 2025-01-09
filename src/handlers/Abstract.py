@@ -11,7 +11,7 @@ class Handler(ABC):
         self.max_pages = args.max_pages
 
     def show_banner(self):
-        print("""Lazy o'subdomain""")
+        print("""     Lazyos\n=================\n""")
 
     @classmethod
     def find_subdomains(self):

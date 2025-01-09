@@ -30,7 +30,7 @@ class Google(Handler):
     def get_total_pages(self):
         self.log("Getting total number of pages to go through", 2)
 
-        page = self.get_page()
+        page = self.get_page(0)
 
         results = (
             page.find("div", id="result-stats")
@@ -38,10 +38,9 @@ class Google(Handler):
             .replace(".", "")
             .replace(",", "")
         )
+
         num_results = re.search(r"\d+", results)
         total_pages = math.floor(int(num_results.group(0)) / self.offset)
-
-        self.log(f"Going through {total_pages} pages")
 
         return total_pages
 
