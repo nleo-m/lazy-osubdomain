@@ -22,7 +22,7 @@ class Google(Handler):
 
         for page in range(0, total_pages):
             time.sleep(self.timeout)
-            page = self.get_parsed_page(page)
+            page = self.get_page(page)
             self.get_page_urls(page)
 
         self.show_results()
@@ -30,16 +30,10 @@ class Google(Handler):
     def get_total_pages(self):
         self.log("Getting total number of pages to go through", 2)
 
-        r = requests.get(
-            f"{self.base_url}/search?q=site:*.{self.domain}&num=1",
-            headers={
-                "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0"
-            },
-        )
+        page = self.get_page()
 
-        soup = BeautifulSoup(r.content, "lxml")
         results = (
-            soup.find("div", id="result-stats")
+            page.find("div", id="result-stats")
             .get_text()
             .replace(".", "")
             .replace(",", "")
@@ -51,17 +45,22 @@ class Google(Handler):
 
         return total_pages
 
-    def get_parsed_page(self, page=1):
-        r = requests.get(
+    def get_page(self, page=1):
+        response = requests.get(
             f"{self.base_url}/search?q=site:*.{self.domain}&start={page * self.offset}&num={self.offset}",
             headers={
                 "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0"
             },
         )
 
-        self.log(f"Page {page} responded with {r.status_code}", 2)
+        if str(response.status_code)[0] != "2":
+            raise SystemExit(
+                f"\033[31mRequests returning {response.status_code} {response.reason}\033[39m"
+            )
 
-        soup = BeautifulSoup(r.content, "lxml")
+        self.log(f"Page {page} responded with {response.status_code}", 2)
+
+        soup = BeautifulSoup(response.content, "lxml")
 
         return soup
 
