@@ -20,6 +20,12 @@ def get_args():
         default=0,
         help="Set Verbosity level, use -v or -vv",
     )
+    parser.add_argument(
+        "-c",
+        "--check-status",
+        action="store_true",
+        help="Check status code of each domain",
+    )
 
     args = parser.parse_args()
     return args
