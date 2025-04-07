@@ -4,7 +4,7 @@ This tool is designed to enumerate subdomains using OSINT.
 This is still under development and currently, only Google is supported.
 
 <div align="center">
-  <img src="/public/assets/preview.jpeg" width="100%" />
+  <img src="/assets/preview.jpeg" width="100%" />
 </div>
 
 ## Installation
