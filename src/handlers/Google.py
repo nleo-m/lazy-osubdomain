@@ -25,6 +25,9 @@ class Google(Handler):
             page = self.get_page(page)
             self.get_page_urls(page)
 
+        if self.check_status:
+            self.check_domains()
+
         self.show_results()
 
     def get_total_pages(self):
